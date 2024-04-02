@@ -1,9 +1,9 @@
-module r00t2.io/gosecret
+module github.com/L11R/gosecret
 
 go 1.17
 
 require (
-	github.com/godbus/dbus/v5 v5.0.6
-	github.com/google/uuid v1.3.0
-	r00t2.io/goutils v1.1.2
+	github.com/godbus/dbus/v5 v5.1.0
+	github.com/google/uuid v1.6.0
+	r00t2.io/goutils v1.4.0
 )

@@ -76,10 +76,10 @@ func (i *Item) Attributes() (attrs map[string]string, err error) {
 }
 
 /*
-	ChangeItemType changes an Item.Type to newItemType.
-	Note that this is probably a bad idea unless you're also doing Item.SetSecret.
-	It must be a Dbus interface path (e.g. "foo.bar.Baz").
-	If newItemType is an empty string, DbusDefaultItemType will be used.
+ChangeItemType changes an Item.Type to newItemType.
+Note that this is probably a bad idea unless you're also doing Item.SetSecret.
+It must be a Dbus interface path (e.g. "foo.bar.Baz").
+If newItemType is an empty string, DbusDefaultItemType will be used.
 */
 func (i *Item) ChangeItemType(newItemType string) (err error) {
 
@@ -182,13 +182,13 @@ func (i *Item) Label() (label string, err error) {
 }
 
 /*
-	ModifyAttributes modifies the Item's attributes in Dbus.
-	This is similar to Item.ReplaceAttributes but will only modify the map's given keys so you do not need to provide
-	the entire attribute map.
-	If you wish to remove an attribute, use the value "" (empty string).
-	If you wish to explicitly provide a blank value/empty string, use the constant gosecret.ExplicitAttrEmptyValue.
+ModifyAttributes modifies the Item's attributes in Dbus.
+This is similar to Item.ReplaceAttributes but will only modify the map's given keys so you do not need to provide
+the entire attribute map.
+If you wish to remove an attribute, use the value "" (empty string).
+If you wish to explicitly provide a blank value/empty string, use the constant gosecret.ExplicitAttrEmptyValue.
 
-	This is more or less a convenience/wrapper function around Item.ReplaceAttributes.
+This is more or less a convenience/wrapper function around Item.ReplaceAttributes.
 */
 func (i *Item) ModifyAttributes(replaceAttrs map[string]string) (err error) {
 
@@ -267,7 +267,7 @@ func (i *Item) SetSecret(secret *Secret) (err error) {
 	var call *dbus.Call
 
 	if call = i.Dbus.Call(
-		DbusItemSetSecret, 0,
+		DbusItemSetSecret, 0, secret,
 	); call.Err != nil {
 		err = call.Err
 		return
@@ -381,12 +381,12 @@ func (i *Item) Created() (created time.Time, err error) {
 }
 
 /*
-	Modified returns the time.Time of when an Item was last modified along with a boolean
-	that indicates if the collection has changed since the last call of Item.Modified.
+Modified returns the time.Time of when an Item was last modified along with a boolean
+that indicates if the collection has changed since the last call of Item.Modified.
 
-	Note that when calling NewItem, the internal library-tracked modification
-	time (Item.LastModified) will be set to the latest modification time of the Item
-	itself as reported by Dbus rather than the time that NewItem was called.
+Note that when calling NewItem, the internal library-tracked modification
+time (Item.LastModified) will be set to the latest modification time of the Item
+itself as reported by Dbus rather than the time that NewItem was called.
 */
 func (i *Item) Modified() (modified time.Time, isChanged bool, err error) {
 
